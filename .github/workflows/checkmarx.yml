@@ -16,12 +16,12 @@ jobs:
         uses: checkmarx-ts/checkmarx-cxflow-github-action@v2.3
         with:
           project: ${{ github.event.repository.name }}
-          team: "/CxServer/armorcode" # e.g., /CxServer/SP/MyTeam
+          #team: "/CxServer/armorcode" # e.g., /CxServer/SP/MyTeam
           checkmarx_url: ${{ secrets.CHECKMARX_URL }}
           checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
           checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
           checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
           # Injects commit hash and branch into the Scan Comment
-          params: --comment="GitHub Commit-${{ github.sha }}" --logging.level.com.checkmarx=DEBUG --logging.level.com.checkmarx.flow=DEBUG
+          params: --comment="GitHub Commit-${{ github.sha }}" --cx-team=/CxServer/armorcode --logging.level.com.checkmarx=DEBUG --logging.level.com.checkmarx.flow=DEBUG
           incremental: true
           break_build: false # Set to true to fail pipeline on high vulnerabilities
