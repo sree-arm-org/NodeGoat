@@ -22,6 +22,6 @@ jobs:
           checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
           checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
           # Injects commit hash and branch into the Scan Comment
-          params: --branch=${{ github.ref_name }} --comment="GitHub Commit:${{ github.sha }}"
+          params: --comment="GitHub Commit-${{ github.sha }}"
           incremental: true
           break_build: false # Set to true to fail pipeline on high vulnerabilities
