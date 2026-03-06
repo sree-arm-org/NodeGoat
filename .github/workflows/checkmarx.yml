@@ -1,0 +1,30 @@
+name: Checkmarx SAST Scan
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  checkmarx-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full history is available if needed
+
+      - name: Checkmarx SAST Scan
+        uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.4
+        with:
+          project: ${{ github.event.repository.name }}
+          team: ${{ secrets.CHECKMARX_TEAM }} # e.g., /CxServer/SP/MyTeam
+          checkmarx_url: ${{ secrets.CHECKMARX_URL }}
+          checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
+          checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
+          checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
+          # Injects commit hash and branch into the Scan Comment
+          params: --branch=${{ github.ref_name }} --comment="GitHub Commit:${{ github.sha }}"
+          incremental: true
+          break_build: false # Set to true to fail pipeline on high vulnerabilities
