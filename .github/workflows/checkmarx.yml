@@ -1,11 +1,8 @@
 name: Checkmarx SAST Scan
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-
+  workflow_dispatch:
+    
 jobs:
   checkmarx-scan:
     runs-on: ubuntu-latest
