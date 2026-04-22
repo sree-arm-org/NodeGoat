@@ -8,6 +8,12 @@ function ResearchHandler(db) {
     "use strict";
 
     const researchDAO = new ResearchDAO(db);
+    const researchDAO1 = new ResearchDAO(db);
+    const researchDAO2 = new ResearchDAO(db);
+    const researchDAO3 = new ResearchDAO(db);
+    const researchDAO4 = new ResearchDAO(db);
+    const researchDAO5 = new ResearchDAO(db);
+
 
     this.displayResearch = (req, res) => {
 
